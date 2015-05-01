@@ -1,2 +1,30 @@
 # osx-launchd-env
+
 Import environment variables for launchd (includes GUI app from dock) from your shell.
+
+## Description
+
+Apps executed by launchd and GUI apps from dock are can't get your environment variables.
+Some apps like `MacVim.app` or `Eclipse.app` expects environment variables exist, though.
+
+From Mac OS X Yosemite (10.10), `launchd.conf` does not work (See `man 5 launchd.conf`).
+
+So we have only one way to define environment variables for launchd: using `launchctl setenv` command.
+
+This scripts simply do it by getting environment variables from `env` command in your login shell and call `launchctl setenv`.
+
+## Usage
+
+Just execute `install.sh` from your shell.
+Then logout and login.
+
+## Files
+
+`install.sh` creates a file `~/Library/LaunchAgents/osx-launchd-env.plist`.
+
+This file defines a job called when login that executing `setenv.sh` in clone of this repository.
+
+## Note
+
+* When you changed login shell, execute `install.sh` again.
+* When you edited your rc files, do logout and login or execute `setenv.sh`.
