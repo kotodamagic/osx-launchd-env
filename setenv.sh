@@ -1,4 +1,3 @@
-echo "called" >> /tmp/setenv
 /usr/bin/env | while read line; do
     k=`echo $line | sed -Ee 's/^([^=]*)=.*/\1/'`
     v=`echo $line | sed -Ee 's/^[^=]*=(.*)/\1/'`
