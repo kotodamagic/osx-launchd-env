@@ -24,7 +24,15 @@ Then logout and login.
 
 This file defines a job called when login that executing `setenv.sh` in clone of this repository.
 
+## Configuration
+
+* `conf/whitelist` defines whitelist of environment keys. If this file is not exist or empty, all variables will be exported.
+* `conf/blacklist` defines blacklist of environment keys. If this file is not exist or empty, all variables will be exported.
+
+The order of evaluation is first whitelist, next blacklist. If you define same key in whitelist and blacklist, the variable will not be exported.
+
 ## Note
 
 * When you changed login shell, execute `install.sh` again.
 * When you edited your rc files, do logout and login or execute `setenv.sh`.
+* Now we can't clean unused variables because `launchctl export` does not work (See #1). `launchctl setenv` command saves variables permanently. To remove variables, we have to call `launchctl unsetenv` manually.
